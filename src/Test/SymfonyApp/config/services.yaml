@@ -1,0 +1,124 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\:
+    resource: ../Cases
+
+  # Alias
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Main:
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Injected:
+    tags: [replaceable]
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Injected.alias: '@JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Injected'
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Injected.recursive_alias: '@JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Injected.alias'
+
+  # ConstructorInjection
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\ConstructorInjection\Main:
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\ConstructorInjection\Injected:
+    tags: [replaceable]
+
+  # Decoration
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration\Main:
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration\SomeInterface: '@JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration\Decorated'
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration\Decorated:
+    tags: [replaceable]
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration\FirstDecorator:
+    decorates: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration\Decorated
+    tags: [replaceable]
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration\SecondDecorator:
+    decorates: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration\Decorated
+    tags: [replaceable]
+
+  # Factory
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Factory\Main:
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Factory\Injected:
+    factory: ['@JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Factory\Factory', 'createInjected']
+    tags: [replaceable]
+
+  # NonShared
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\NonShared\Main:
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\NonShared\Injected:
+    shared: false
+    tags: [replaceable]
+
+  # ImmutableSetterInjection
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\ImmutableSetterInjection\Main:
+    calls:
+      - setInjected: !returns_clone ['@JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\ImmutableSetterInjection\Injected']
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\ImmutableSetterInjection\Injected:
+    tags: [replaceable]
+
+  # Lazy
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Lazy\Main:
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Lazy\Injected:
+    lazy: true
+    tags: [replaceable]
+
+  # Parent
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Main:
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected.parent:
+    abstract: true
+    class: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected
+    arguments:
+      $argument: foo
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected:
+    parent: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected.parent
+    tags: [replaceable]
+
+  # PropertyInjection
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\PropertyInjection\Main:
+    properties:
+      injected: '@JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\PropertyInjection\Injected'
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\PropertyInjection\Injected:
+    tags: [replaceable]
+
+  # PublicService
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\PublicService\Main:
+    public: true
+    tags: [replaceable]
+
+  # ServiceSubscriber
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\ServiceSubscriber\Main:
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\ServiceSubscriber\Injected:
+    tags: [replaceable]
+
+  # SetterInjection
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\SetterInjection\Main:
+    calls:
+      - setInjected: ['@JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\SetterInjection\Injected']
+    public: true
+
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\SetterInjection\Injected:
+    tags: [replaceable]
+
+  # Single
+  JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Single\Main:
+    public: true
+    tags: [replaceable]

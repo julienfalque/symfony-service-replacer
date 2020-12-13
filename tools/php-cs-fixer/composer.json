@@ -1,0 +1,6 @@
+{
+  "require": {
+    "php": "7.3.*",
+    "friendsofphp/php-cs-fixer": "^2.17"
+  }
+}

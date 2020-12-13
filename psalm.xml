@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<psalm
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="https://getpsalm.org/schema/config"
+  xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
+  phpVersion="8.0"
+  errorLevel="1"
+  useDocblockPropertyTypes="true"
+  strictBinaryOperands="true"
+  checkForThrowsDocblock="true"
+  ignoreInternalFunctionFalseReturn="false"
+  ignoreInternalFunctionNullReturn="false"
+  findUnusedPsalmSuppress="true"
+  ensureArrayStringOffsetsExist="true"
+  ensureArrayIntOffsetsExist="true"
+  sealAllMethods="true"
+  cacheDirectory="tools/psalm/cache"
+>
+  <projectFiles>
+    <directory name="src"/>
+    <ignoreFiles>
+      <directory name="src/Test/SymfonyApp/var"/>
+      <directory name="vendor"/>
+    </ignoreFiles>
+  </projectFiles>
+
+  <plugins>
+    <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
+      <containerXml>src/Test/SymfonyApp/var/cache/test/JulienFalque_SymfonyServiceReplacer_Test_SymfonyApp_KernelTestDebugContainer.xml</containerXml>
+    </pluginClass>
+  </plugins>
+
+  <ignoreExceptions>
+    <class name="Psr\Container\ContainerExceptionInterface"/>
+    <class name="Psr\Container\NotFoundExceptionInterface"/>
+  </ignoreExceptions>
+
+  <issueHandlers>
+    <MissingThrowsDocblock>
+      <errorLevel type="suppress">
+        <file name="src/Bridge/Symfony/DependencyInjection/Extension.php"/>
+        <file name="src/Proxy/FactoryTest.php"/>
+        <file name="src/Test/IntegrationTest.php"/>
+        <file name="src/Test/SymfonyApp/Cases/ServiceSubscriber/Main.php"/>
+      </errorLevel>
+    </MissingThrowsDocblock>
+  </issueHandlers>
+</psalm>

@@ -1,0 +1,8 @@
+/composer.lock
+/.php_cs.cache
+/.phpunit.cache/
+/src/Test/SymfonyApp/var/
+/tools/*/vendor/
+/tools/phpstan/cache/
+/tools/psalm/cache/
+/vendor/

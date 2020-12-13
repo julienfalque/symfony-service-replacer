@@ -1,0 +1,28 @@
+includes:
+  - tools/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - tools/phpstan/vendor/phpstan/phpstan-phpunit/extension.neon
+  - tools/phpstan/vendor/phpstan/phpstan-phpunit/rules.neon
+  - tools/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
+  - tools/phpstan/vendor/phpstan/phpstan-symfony/extension.neon
+  - tools/phpstan/vendor/phpstan/phpstan-symfony/rules.neon
+
+parameters:
+  level: 8
+  paths:
+    - src
+  excludes_analyse:
+    - src/Test/SymfonyApp/var
+  tmpDir: tools/phpstan/cache
+
+  symfony:
+    container_xml_path: src/Test/SymfonyApp/var/cache/test/JulienFalque_SymfonyServiceReplacer_Test_SymfonyApp_KernelTestDebugContainer.xml
+
+  ignoreErrors:
+    -
+      message: '#^Method class@anonymous/Proxy/Factory\.php:\d+::generate\(\) has parameter \$originalClass with generic class ReflectionClass but does not specify its types: T$#'
+      count: 1
+      path: src/Proxy/Factory.php
+    -
+      message: '#^Call to static method PHPUnit\\Framework\\Assert::assertInstanceOf\(\) with .JulienFalque\\\\SymfonyServiceReplacer\\\\ServiceReplacer. and JulienFalque\\SymfonyServiceReplacer\\ServiceReplacer will always evaluate to true\.$#'
+      count: 1
+      path: src/Test/IntegrationTest.php
