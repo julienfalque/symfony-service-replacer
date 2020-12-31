@@ -1,0 +1,26 @@
+name: Composer validation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - composer.json
+  pull_request:
+    paths:
+      - composer.json
+
+jobs:
+  composer:
+    name: Composer validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate composer.json
+        run: composer validate --strict

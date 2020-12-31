@@ -1,0 +1,29 @@
+name: PHP code style
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**.php'
+  pull_request:
+    paths:
+      - '**.php'
+
+jobs:
+  php-cs-fixer:
+    name: PHP CS Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.3'
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install PHP CS Fixer
+        run: composer install --working-dir=tools/php-cs-fixer
+
+      - name: Run PHP CS Fixer
+        run: PHP_CS_FIXER_FUTURE_MODE=1 tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -v --show-progress=dots --diff-format=udiff --dry-run

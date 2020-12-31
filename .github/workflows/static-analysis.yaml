@@ -1,0 +1,55 @@
+name: Static analysis
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install project dependencies
+        run: composer install
+
+      - name: Install PHPStan
+        run: composer install --working-dir=tools/phpstan
+
+      - name: Create Symfony cache
+        run: src/Test/SymfonyApp/bin/create-cache
+
+      - name: Run PHPStan
+        run: tools/phpstan/vendor/bin/phpstan analyze
+
+  psalm:
+    name: Psalm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install project dependencies
+        run: composer install
+
+      - name: Install Psalm
+        run: composer install --working-dir=tools/psalm
+
+      - name: Create Symfony cache
+        run: src/Test/SymfonyApp/bin/create-cache
+
+      - name: Run Psalm
+        run: tools/psalm/vendor/bin/psalm

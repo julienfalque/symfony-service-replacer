@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+use JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Kernel;
+
+require dirname(__DIR__, 4).'/vendor/autoload.php';
+
+$kernel = new Kernel('test', true);
+$kernel->boot();
