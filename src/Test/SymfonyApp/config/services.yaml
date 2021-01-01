@@ -86,6 +86,8 @@ services:
 
   JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected:
     parent: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected.parent
+    autowire: false # required with symfony/dependency-injection v5.0.*
+    autoconfigure: false # required with symfony/dependency-injection v5.0.*
     tags: [replaceable]
 
   # PropertyInjection

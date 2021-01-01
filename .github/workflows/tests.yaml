@@ -7,11 +7,12 @@ on:
 
 jobs:
   phpunit:
-    name: PHPUnit (PHP ${{ matrix.php-version }})
+    name: PHPUnit (PHP ${{ matrix.php-version }}${{ matrix.composer-prefer-lowest && ', with lowest dependencies' || '' }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php-version: [ '7.3', '7.4', '8.0' ]
+        composer-prefer-lowest: [ false, true ]
     steps:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
@@ -21,8 +22,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # https://github.com/symfony/symfony/pull/37763
+      - name: Update constraints
+        if: matrix.composer-prefer-lowest && matrix.php-version == '8.0'
+        run: composer require --dev --prefer-lowest symfony/config:^5.1.4 symfony/dependency-injection:^5.1.4
+
       - name: Install project dependencies
-        run: composer install
+        run: composer update ${{ matrix.composer-prefer-lowest && '--prefer-lowest' || '' }}
 
       - name: Run PHPUnit
         run: vendor/bin/phpunit

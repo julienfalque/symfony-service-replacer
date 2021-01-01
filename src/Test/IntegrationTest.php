@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace JulienFalque\SymfonyServiceReplacer\Test;
 
 use JulienFalque\SymfonyServiceReplacer\ServiceReplacer;
-use JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases;
+use JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\{Cases, Kernel, KernelSymfony50};
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -341,5 +342,14 @@ final class IntegrationTest extends KernelTestCase
 
         $replacer = self::$container->get(ServiceReplacer::class);
         $replacer->replace($replacedServiceId, $mock);
+    }
+
+    protected static function getKernelClass(): string
+    {
+        if (!method_exists(MicroKernelTrait::class, 'registerBundle')) {
+            return KernelSymfony50::class;
+        }
+
+        return Kernel::class;
     }
 }

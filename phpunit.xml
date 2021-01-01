@@ -12,10 +12,6 @@
   failOnWarning="true"
   verbose="true"
 >
-  <php>
-    <env name="KERNEL_CLASS" value="JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Kernel"/>
-  </php>
-
   <testsuites>
     <testsuite name="default">
       <directory>src</directory>

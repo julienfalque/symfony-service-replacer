@@ -26,3 +26,7 @@ parameters:
       message: '#^Call to static method PHPUnit\\Framework\\Assert::assertInstanceOf\(\) with .JulienFalque\\\\SymfonyServiceReplacer\\\\ServiceReplacer. and JulienFalque\\SymfonyServiceReplacer\\ServiceReplacer will always evaluate to true\.$#'
       count: 1
       path: src/Test/IntegrationTest.php
+    -
+      message: '#^Method JulienFalque\\SymfonyServiceReplacer\\Test\\SymfonyApp\\KernelSymfony50::configureRoutes\(\) has parameter \$routes with no typehint specified\.$#'
+      count: 1
+      path: src/Test/SymfonyApp/KernelSymfony50.php
