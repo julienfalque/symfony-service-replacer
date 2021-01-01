@@ -23,7 +23,11 @@
   "autoload": {
     "psr-4": {
       "JulienFalque\\SymfonyServiceReplacer\\": "src"
-    }
+    },
+    "exclude-from-classmap": [
+      "/src/Test/",
+      "/src/**Test.php"
+    ]
   },
   "config": {
     "sort-packages": true

@@ -5,9 +5,11 @@ on:
   push:
     paths:
       - composer.json
+      - src/**
   pull_request:
     paths:
       - composer.json
+      - src/**
 
 jobs:
   composer:
@@ -17,10 +19,19 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '7.4'
 
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Validate composer.json
         run: composer validate --strict
+
+      - name: Install Composer Require Checker
+        run: composer install --working-dir=tools/composer-require-checker
+
+      - name: Install project dependencies
+        run: composer install
+
+      - name: Run Composer Require Checker
+        run: tools/composer-require-checker/vendor/bin/composer-require-checker check --config-file=.composer-require-checker.json
