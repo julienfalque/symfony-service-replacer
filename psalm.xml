@@ -41,6 +41,8 @@
       <errorLevel type="suppress">
         <file name="src/Bridge/Symfony/DependencyInjection/Extension.php"/>
         <file name="src/Proxy/FactoryTest.php"/>
+        <file name="src/Proxy/SpecificationTest.php"/>
+        <file name="src/ServiceReplacerTest.php"/>
         <file name="src/Test/IntegrationTest.php"/>
         <file name="src/Test/SymfonyApp/Cases/ServiceSubscriber/Main.php"/>
       </errorLevel>

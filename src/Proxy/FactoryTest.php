@@ -19,13 +19,13 @@ final class FactoryTest extends TestCase
         $replacer = new ServiceReplacer([]);
         $factory = new Factory($replacer);
 
-        $service = new Test\Service();
+        $service = new FactoryTest\Service();
         $specification = new Specification('foo', $service);
 
         $proxy = $factory->createServiceProxy($specification);
 
         self::assertInstanceOf(Proxy::class, $proxy);
-        self::assertInstanceOf(Test\Service::class, $proxy);
+        self::assertInstanceOf(FactoryTest\Service::class, $proxy);
 
         self::assertSame('foo', $proxy->getValue());
 
@@ -44,7 +44,7 @@ final class FactoryTest extends TestCase
     }
 }
 
-namespace JulienFalque\SymfonyServiceReplacer\Proxy\Test;
+namespace JulienFalque\SymfonyServiceReplacer\Proxy\FactoryTest;
 
 /**
  * @internal
