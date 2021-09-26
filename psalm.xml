@@ -39,7 +39,6 @@
   <issueHandlers>
     <MissingParamType>
       <errorLevel type="suppress">
-        <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
       </errorLevel>
     </MissingParamType>
     <MissingThrowsDocblock>
@@ -50,20 +49,13 @@
         <file name="src/Proxy/SpecificationTest.php"/>
         <file name="src/Test/IntegrationTest.php"/>
         <file name="src/Test/SymfonyApp/Cases/ServiceSubscriber/Main.php"/>
-        <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
       </errorLevel>
     </MissingThrowsDocblock>
     <MixedOperand>
       <errorLevel type="suppress">
         <file name="src/Test/SymfonyApp/Kernel.php"/>
-        <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
       </errorLevel>
     </MixedOperand>
-    <MixedArrayOffset>
-      <errorLevel type="suppress">
-        <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
-      </errorLevel>
-    </MixedArrayOffset>
     <InternalClass>
       <errorLevel type="suppress">
         <file name="src/Bridge/Symfony/TestContainer.php"/>

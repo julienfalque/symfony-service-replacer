@@ -2,7 +2,15 @@
   "symbol-whitelist" : [
     "array", "bool", "callable", "int", "null", "object", "parent", "string", "true", "void",
 
-    "service"
+    "service",
+
+    "ProxyManager\\Factory\\AbstractBaseFactory",
+    "ProxyManager\\Generator\\MethodGenerator",
+    "ProxyManager\\ProxyGenerator\\Assertion\\CanProxyAssertion",
+    "ProxyManager\\ProxyGenerator\\ProxyGeneratorInterface",
+    "ProxyManager\\ProxyGenerator\\Util\\ProxiedMethodsFilter",
+    "ProxyManager\\Signature\\Exception\\InvalidSignatureException",
+    "ProxyManager\\Signature\\Exception\\MissingSignatureException"
   ],
   "php-core-extensions" : [
     "Core",

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace JulienFalque\SymfonyServiceReplacer\Test;
 
-use JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\{Cases, Kernel, KernelSymfony50};
+use JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\{Cases, Kernel};
 use stdClass;
-use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
@@ -24,7 +23,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_simple_service(): void
     {
-        $entrypoint = self::$container->get(Cases\Single\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Single\Main::class);
 
         self::assertSame(
             'Real value from Main',
@@ -41,7 +40,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_via_an_alias(): void
     {
-        $entrypoint = self::$container->get(Cases\Alias\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Alias\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -58,7 +57,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_via_a_recursive_alias(): void
     {
-        $entrypoint = self::$container->get(Cases\Alias\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Alias\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -75,7 +74,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_public_service(): void
     {
-        $entrypoint = self::$container->get(Cases\PublicService\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\PublicService\Main::class);
 
         self::assertSame(
             'Real value from Main',
@@ -92,7 +91,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_injected_into_another_one_via_its_constructor(): void
     {
-        $entrypoint = self::$container->get(Cases\ConstructorInjection\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\ConstructorInjection\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -109,7 +108,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_injected_into_another_one_via_a_setter(): void
     {
-        $entrypoint = self::$container->get(Cases\SetterInjection\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\SetterInjection\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -126,7 +125,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_injected_into_another_one_via_an_immutable_setter(): void
     {
-        $entrypoint = self::$container->get(Cases\ImmutableSetterInjection\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\ImmutableSetterInjection\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -143,7 +142,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_injected_into_another_one_via_a_public_property(): void
     {
-        $entrypoint = self::$container->get(Cases\PropertyInjection\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\PropertyInjection\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -160,7 +159,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_that_uses_a_factory(): void
     {
-        $entrypoint = self::$container->get(Cases\Factory\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Factory\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -177,7 +176,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_decorated_service(): void
     {
-        $entrypoint = self::$container->get(Cases\Decoration\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Decoration\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from SecondDecorator / Real value from FirstDecorator / Real value from Decorated',
@@ -194,7 +193,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_the_first_decorator_in_a_decoration_stack(): void
     {
-        $entrypoint = self::$container->get(Cases\Decoration\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Decoration\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from SecondDecorator / Real value from FirstDecorator / Real value from Decorated',
@@ -211,7 +210,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_the_second_decorator_in_a_decoration_stack(): void
     {
-        $entrypoint = self::$container->get(Cases\Decoration\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Decoration\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from SecondDecorator / Real value from FirstDecorator / Real value from Decorated',
@@ -228,7 +227,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_lazy_service(): void
     {
-        $entrypoint = self::$container->get(Cases\Lazy\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Lazy\Main::class);
 
         self::assertFalse(Cases\Lazy\Injected::wasInstanciated());
         self::assertSame(
@@ -247,7 +246,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_that_inherits_a_parent_definition(): void
     {
-        $entrypoint = self::$container->get(Cases\Parent\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\Parent\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -264,7 +263,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_service_injected_via_a_service_locator(): void
     {
-        $entrypoint = self::$container->get(Cases\ServiceSubscriber\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\ServiceSubscriber\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
@@ -281,7 +280,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_replaces_a_non_shared_service(): void
     {
-        $entrypoint = self::$container->get(Cases\NonShared\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\NonShared\Main::class);
 
         self::assertSame(
             'Real value from Main / Real value from Injected 1',
@@ -306,7 +305,7 @@ final class IntegrationTest extends KernelTestCase
 
     public function test_it_restores_a_replaced_service(): void
     {
-        $entrypoint = self::$container->get(Cases\PublicService\Main::class);
+        $entrypoint = self::getContainer()->get(Cases\PublicService\Main::class);
 
         $this->replaceService(Cases\PublicService\Main::class);
 
@@ -315,7 +314,7 @@ final class IntegrationTest extends KernelTestCase
             $entrypoint->getValue()
         );
 
-        self::$container->restore(Cases\PublicService\Main::class);
+        self::getContainer()->restore(Cases\PublicService\Main::class);
 
         self::assertSame(
             'Real value from Main',
@@ -327,11 +326,11 @@ final class IntegrationTest extends KernelTestCase
     {
         $service = new stdClass();
 
-        self::$container->set('synthetic_service', $service);
+        self::getContainer()->set('synthetic_service', $service);
 
         self::assertSame(
             $service,
-            self::$container->get('synthetic_service')
+            self::getContainer()->get('synthetic_service')
         );
     }
 
@@ -340,18 +339,18 @@ final class IntegrationTest extends KernelTestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "non_replaceable_service" service is private, you cannot replace it.');
 
-        self::$container->set('non_replaceable_service', new stdClass());
+        self::getContainer()->set('non_replaceable_service', new stdClass());
     }
 
     public function test_it_still_replaces_a_non_replaceable_but_public_service(): void
     {
         $service = new stdClass();
 
-        self::$container->set('non_replaceable_but_public_service', $service);
+        self::getContainer()->set('non_replaceable_but_public_service', $service);
 
         self::assertSame(
             $service,
-            self::$container->get('non_replaceable_but_public_service')
+            self::getContainer()->get('non_replaceable_but_public_service')
         );
     }
 
@@ -383,15 +382,11 @@ final class IntegrationTest extends KernelTestCase
             }
         };
 
-        self::$container->set($replacedServiceId, $mock);
+        self::getContainer()->set($replacedServiceId, $mock);
     }
 
     protected static function getKernelClass(): string
     {
-        if (!method_exists(MicroKernelTrait::class, 'registerBundle')) {
-            return KernelSymfony50::class;
-        }
-
         return Kernel::class;
     }
 }

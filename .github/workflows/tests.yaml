@@ -22,11 +22,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # https://github.com/symfony/symfony/pull/37763
-      - name: Update constraints
-        if: matrix.composer-prefer-lowest && matrix.php-version == '8.0'
-        run: composer require --dev --prefer-lowest symfony/config:^5.1.4 symfony/dependency-injection:^5.1.4
-
       - name: Install project dependencies
         run: composer update ${{ matrix.composer-prefer-lowest && '--prefer-lowest' || '' }}
 
