@@ -53,5 +53,16 @@
         <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
       </errorLevel>
     </MissingThrowsDocblock>
+    <MixedOperand>
+      <errorLevel type="suppress">
+        <file name="src/Test/SymfonyApp/Kernel.php"/>
+        <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
+      </errorLevel>
+    </MixedOperand>
+    <MixedArrayOffset>
+      <errorLevel type="suppress">
+        <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
+      </errorLevel>
+    </MixedArrayOffset>
   </issueHandlers>
 </psalm>
