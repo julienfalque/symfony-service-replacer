@@ -107,9 +107,7 @@ final class Factory extends AbstractBaseFactory
                         $returnType !== null && $returnType->generate() !== 'void' ? 'return ' : '',
                         $proxyMethod->getName(),
                         implode(', ', array_map(
-                            static function (ParameterGenerator $parameter): string {
-                                return '$'.$parameter->getName();
-                            },
+                            static fn (ParameterGenerator $parameter): string => '$'.$parameter->getName(),
                             $proxyMethod->getParameters()
                         ))
                     ));
