@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\DependencyInjection\Compiler;
 
-use JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\SpecificationFactory;
+use JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\{ReplacementMap, SpecificationFactory};
 use JulienFalque\SymfonyServiceReplacer\Proxy\Factory;
 use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -45,6 +45,9 @@ final class DecorateReplaceableServicesPass implements CompilerPassInterface
 
             $decoratedServicesMap[$serviceId] = new Reference("{$proxyId}.inner");
         }
+
+        $replacementMap = $this->getDefinition($container, ReplacementMap::class);
+        $replacementMap->setArgument('$replaceableIds', array_keys($decoratedServicesMap));
 
         $specificationFactory = $this->getDefinition($container, SpecificationFactory::class.'.specification_factory_locator');
         $specificationFactory->setArguments([$decoratedServicesMap]);

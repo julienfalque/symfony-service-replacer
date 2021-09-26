@@ -1,6 +1,6 @@
 # Symfony Service Replacer
 
-Provides a way to replace services in a Symfony Dependency Injection Container at runtime.
+Provides a way to replace services in a Symfony Dependency Injection Container at runtime for testing purposes.
 
 ## Installation
 
@@ -21,11 +21,18 @@ return [
 ];
 ```
 
+The bundle decorates Symfony's test container (`test.service_container`) so make sure it is available by enabling
+`FrameworkBundle`'s test mode:
+
+```yaml
+# config/packages/test/framework.yaml
+framework:
+  test: true
+```
+
 ## Usage
 
-Each service that you want to replace at runtime is decorated with a proxy that acts exactly like the original service.
-By default, this proxy forwards calls to the original service and returns their results unchanged. You have to
-explicitly mark the services you want to replace with the `replaceable` tag:
+To make a service replaceable at runtime, add the `replaceable` tag to it:
 
 ```yaml
 # config/services.yaml
@@ -35,15 +42,18 @@ services:
     tags: [replaceable]
 ```
 
-The `JulienFalque\SymfonyServiceReplacer\ServiceReplacer` public service can be used to replace a service at runtime:
+Each tagged service is decorated with a proxy that forwards calls to the original service and returns their results
+unchanged. Tagged services don't need to be public to be replaced.
+
+At runtime, the test container (`test.service_container`) now allows you to use the `set()` method to replace your
+service and the `restore()` method to use the original service again:
 
 ```php
 $service = $container->get('replaceable_service');
 
 echo "{$service->foo()}\n";
 
-$replacer = $container->get(JulienFalque\SymfonyServiceReplacer\ServiceReplacer::class);
-$replacer->replace('replaceable_service', new class() {
+$container->get('test.service_container')->set('replaceable_service', new class() {
     public function foo(): string
     {
         return 'Bar';
@@ -64,5 +74,3 @@ Foo
 Bar
 Foo
 ```
-
-The replacer service can also be accessed with its alias `service_replacer`.

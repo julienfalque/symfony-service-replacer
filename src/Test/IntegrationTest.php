@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace JulienFalque\SymfonyServiceReplacer\Test;
 
-use JulienFalque\SymfonyServiceReplacer\ServiceReplacer;
 use JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\{Cases, Kernel, KernelSymfony50};
+use stdClass;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * @internal
@@ -303,13 +304,55 @@ final class IntegrationTest extends KernelTestCase
         );
     }
 
-    public function test_it_exposes_the_replacer_as_a_public_service(): void
+    public function test_it_restores_a_replaced_service(): void
     {
-        $replacer = self::$container->get(ServiceReplacer::class);
+        $entrypoint = self::$container->get(Cases\PublicService\Main::class);
 
-        self::assertInstanceOf(ServiceReplacer::class, $replacer);
+        $this->replaceService(Cases\PublicService\Main::class);
 
-        self::assertSame($replacer, self::$container->get('service_replacer'));
+        self::assertSame(
+            'Mocked value from Main',
+            $entrypoint->getValue()
+        );
+
+        self::$container->restore(Cases\PublicService\Main::class);
+
+        self::assertSame(
+            'Real value from Main',
+            $entrypoint->getValue()
+        );
+    }
+
+    public function test_it_still_sets_a_synthetic_service(): void
+    {
+        $service = new stdClass();
+
+        self::$container->set('synthetic_service', $service);
+
+        self::assertSame(
+            $service,
+            self::$container->get('synthetic_service')
+        );
+    }
+
+    public function test_it_does_not_replace_a_non_replaceable_service(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The "non_replaceable_service" service is private, you cannot replace it.');
+
+        self::$container->set('non_replaceable_service', new stdClass());
+    }
+
+    public function test_it_still_replaces_a_non_replaceable_but_public_service(): void
+    {
+        $service = new stdClass();
+
+        self::$container->set('non_replaceable_but_public_service', $service);
+
+        self::assertSame(
+            $service,
+            self::$container->get('non_replaceable_but_public_service')
+        );
     }
 
     /**
@@ -340,8 +383,7 @@ final class IntegrationTest extends KernelTestCase
             }
         };
 
-        $replacer = self::$container->get(ServiceReplacer::class);
-        $replacer->replace($replacedServiceId, $mock);
+        self::$container->set($replacedServiceId, $mock);
     }
 
     protected static function getKernelClass(): string

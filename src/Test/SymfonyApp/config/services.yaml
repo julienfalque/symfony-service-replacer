@@ -6,6 +6,16 @@ services:
   JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\:
     resource: ../Cases
 
+  synthetic_service:
+    synthetic: true
+
+  non_replaceable_service:
+    class: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Main
+
+  non_replaceable_but_public_service:
+    class: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Main
+    public: true
+
   # Alias
   JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Alias\Main:
     public: true

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\DependencyInjection\Compiler;
 
-use JulienFalque\SymfonyServiceReplacer\ServiceReplacer;
+use JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\ReplacementMap;
 use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\{ContainerBuilder, Exception\InvalidArgumentException};
@@ -21,7 +21,7 @@ final class ExtractReplaceableServiceAliasesPass implements CompilerPassInterfac
      */
     public function process(ContainerBuilder $container): void
     {
-        $replacer = $this->getDefinition($container, ServiceReplacer::class);
+        $replacementMap = $this->getDefinition($container, ReplacementMap::class);
 
         $aliases = [];
 
@@ -34,7 +34,7 @@ final class ExtractReplaceableServiceAliasesPass implements CompilerPassInterfac
             }
         }
 
-        $replacer->setArgument('$aliases', $aliases);
+        $replacementMap->setArgument('$aliases', $aliases);
     }
 
     /**

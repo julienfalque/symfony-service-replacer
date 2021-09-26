@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace JulienFalque\SymfonyServiceReplacer;
+namespace JulienFalque\SymfonyServiceReplacer\Bridge\Symfony;
 
 use PHPUnit\Framework\TestCase;
 
 /**
  * @nternal
  *
- * @covers \JulienFalque\SymfonyServiceReplacer\ServiceReplacer
+ * @covers \JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\ReplacementMap
  */
-final class ServiceReplacerTest extends TestCase
+final class ReplacementMapTest extends TestCase
 {
     public function test_it_returns_nothing_for_not_replaced_service(): void
     {
-        $replacer = new ServiceReplacer([]);
+        $replacer = new ReplacementMap([], []);
 
         self::assertNull($replacer->getReplacementFor('foo'));
     }
@@ -24,7 +24,7 @@ final class ServiceReplacerTest extends TestCase
     {
         $replacement = new class() { };
 
-        $replacer = new ServiceReplacer([]);
+        $replacer = new ReplacementMap(['foo'], []);
         $replacer->replace('foo', $replacement);
 
         self::assertSame($replacement, $replacer->getReplacementFor('foo'));
@@ -32,7 +32,7 @@ final class ServiceReplacerTest extends TestCase
 
     public function test_it_allows_unsetting_a_service_replacement(): void
     {
-        $replacer = new ServiceReplacer([]);
+        $replacer = new ReplacementMap(['foo'], []);
         $replacer->replace('foo', new class() { });
         $replacer->restore('foo');
 
@@ -43,7 +43,7 @@ final class ServiceReplacerTest extends TestCase
     {
         $replacement = new class() { };
 
-        $replacer = new ServiceReplacer([
+        $replacer = new ReplacementMap(['foo'], [
             'bar' => 'foo',
         ]);
 

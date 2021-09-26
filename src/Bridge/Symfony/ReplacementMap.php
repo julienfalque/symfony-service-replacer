@@ -2,10 +2,18 @@
 
 declare(strict_types=1);
 
-namespace JulienFalque\SymfonyServiceReplacer;
+namespace JulienFalque\SymfonyServiceReplacer\Bridge\Symfony;
 
-final class ServiceReplacer
+use LogicException;
+
+/**
+ * @internal
+ */
+final class ReplacementMap
 {
+    /** @var array<string, true> */
+    private $replaceableIds;
+
     /** @var array<string, string> */
     private $aliases;
 
@@ -13,16 +21,39 @@ final class ServiceReplacer
     private $replacements = [];
 
     /**
+     * @param list<string>          $replaceableIds
      * @param array<string, string> $aliases
      */
-    public function __construct(array $aliases)
-    {
+    public function __construct(
+        array $replaceableIds,
+        array $aliases
+    ) {
+        $this->replaceableIds = [];
+        foreach ($replaceableIds as $id) {
+            $this->replaceableIds[$id] = true;
+        }
+
         $this->aliases = $aliases;
     }
 
+    public function knows(string $id): bool
+    {
+        $id = $this->resolveAlias($id);
+
+        return isset($this->replaceableIds[$id]);
+    }
+
+    /**
+     * @throws LogicException
+     */
     public function replace(string $id, object $replacement): void
     {
         $id = $this->resolveAlias($id);
+
+        if (!$this->knows($id)) {
+            throw new LogicException("Service \"{$id}\" is not replaceable.");
+        }
+
         $this->replacements[$id] = $replacement;
     }
 

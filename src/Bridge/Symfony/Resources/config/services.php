@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use function function_exists;
-use JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\SpecificationFactory;
+use JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\{ReplacementMap, SpecificationFactory, TestContainer};
 use JulienFalque\SymfonyServiceReplacer\Proxy\Factory;
-use JulienFalque\SymfonyServiceReplacer\ServiceReplacer;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
 return static function (ContainerConfigurator $container): void {
@@ -28,10 +27,9 @@ return static function (ContainerConfigurator $container): void {
 
         ->set($specificationFactoryServiceLocator, ServiceLocator::class)
 
-        ->set(ServiceReplacer::class)
-        ->public()
+        ->set(ReplacementMap::class)
 
-        ->alias('service_replacer', ServiceReplacer::class)
-        ->public()
+        ->set(TestContainer::class)
+        ->decorate('test.service_container')
     ;
 };

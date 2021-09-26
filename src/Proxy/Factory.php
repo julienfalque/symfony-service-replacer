@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JulienFalque\SymfonyServiceReplacer\Proxy;
 
-use JulienFalque\SymfonyServiceReplacer\ServiceReplacer;
+use JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\ReplacementMap;
 use Laminas\Code\Generator\Exception\InvalidArgumentException;
 use Laminas\Code\Generator\{ClassGenerator, ParameterGenerator, PropertyGenerator};
 use Laminas\Code\Reflection\MethodReflection;
@@ -24,14 +24,14 @@ use RuntimeException;
  */
 final class Factory extends AbstractBaseFactory
 {
-    /** @var ServiceReplacer */
-    private $replacer;
+    /** @var ReplacementMap */
+    private $replacementMap;
 
-    public function __construct(ServiceReplacer $replacer)
+    public function __construct(ReplacementMap $replacementMap)
     {
         parent::__construct();
 
-        $this->replacer = $replacer;
+        $this->replacementMap = $replacementMap;
     }
 
     /**
@@ -46,10 +46,10 @@ final class Factory extends AbstractBaseFactory
             throw new RuntimeException("Failed creating a proxy for class {$specification->getClass()}.", 0, $exception);
         }
 
-        $replacer = $this->replacer;
+        $replacementMap = $this->replacementMap;
 
-        $getService = static function () use ($replacer, $specification): object {
-            $replacement = $replacer->getReplacementFor($specification->getServiceId());
+        $getService = static function () use ($replacementMap, $specification): object {
+            $replacement = $replacementMap->getReplacementFor($specification->getServiceId());
 
             if ($replacement !== null) {
                 return $replacement;

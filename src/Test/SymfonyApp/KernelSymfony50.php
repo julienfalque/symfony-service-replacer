@@ -10,6 +10,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 class KernelSymfony50 extends BaseKernel
 {
@@ -33,7 +34,7 @@ class KernelSymfony50 extends BaseKernel
         $loader->load($confDir.'/{services}_'.$this->environment.'.yaml', 'glob');
     }
 
-    protected function configureRoutes($routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
     }
 

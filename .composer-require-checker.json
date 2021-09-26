@@ -1,6 +1,6 @@
 {
   "symbol-whitelist" : [
-    "array", "callable", "null", "object", "parent", "string", "void",
+    "array", "bool", "callable", "int", "null", "object", "parent", "string", "true", "void",
 
     "service"
   ],

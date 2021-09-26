@@ -45,9 +45,9 @@
     <MissingThrowsDocblock>
       <errorLevel type="suppress">
         <file name="src/Bridge/Symfony/DependencyInjection/Extension.php"/>
+        <file name="src/Bridge/Symfony/ReplacementMapTest.php"/>
         <file name="src/Proxy/FactoryTest.php"/>
         <file name="src/Proxy/SpecificationTest.php"/>
-        <file name="src/ServiceReplacerTest.php"/>
         <file name="src/Test/IntegrationTest.php"/>
         <file name="src/Test/SymfonyApp/Cases/ServiceSubscriber/Main.php"/>
         <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
@@ -64,5 +64,30 @@
         <file name="src/Test/SymfonyApp/KernelSymfony50.php"/>
       </errorLevel>
     </MixedArrayOffset>
+    <InternalClass>
+      <errorLevel type="suppress">
+        <file name="src/Bridge/Symfony/TestContainer.php"/>
+      </errorLevel>
+    </InternalClass>
+    <InternalMethod>
+      <errorLevel type="suppress">
+        <file name="src/Bridge/Symfony/TestContainer.php"/>
+      </errorLevel>
+    </InternalMethod>
+    <MissingParamType>
+      <errorLevel type="suppress">
+        <file name="src/Bridge/Symfony/TestContainer.php"/>
+      </errorLevel>
+    </MissingParamType>
+    <MixedArgument>
+      <errorLevel type="suppress">
+        <file name="src/Bridge/Symfony/TestContainer.php"/>
+      </errorLevel>
+    </MixedArgument>
+    <UndefinedInterfaceMethod>
+      <errorLevel type="suppress">
+        <file name="src/Test/IntegrationTest.php"/>
+      </errorLevel>
+    </UndefinedInterfaceMethod>
   </issueHandlers>
 </psalm>

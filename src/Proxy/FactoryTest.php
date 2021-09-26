@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JulienFalque\SymfonyServiceReplacer\Proxy;
 
-use JulienFalque\SymfonyServiceReplacer\ServiceReplacer;
+use JulienFalque\SymfonyServiceReplacer\Bridge\Symfony\ReplacementMap;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,7 +16,7 @@ final class FactoryTest extends TestCase
 {
     public function test_it_creates_a_proxy_from_a_proxy_specification(): void
     {
-        $replacer = new ServiceReplacer([]);
+        $replacer = new ReplacementMap(['foo'], []);
         $factory = new Factory($replacer);
 
         $service = new FactoryTest\Service();

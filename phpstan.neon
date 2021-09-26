@@ -10,6 +10,8 @@ parameters:
   level: 8
   paths:
     - src
+  stubFiles:
+    - tools/phpstan/stubs/TestContainer.php
   excludes_analyse:
     - src/Test/SymfonyApp/var
   tmpDir: tools/phpstan/cache
@@ -23,10 +25,14 @@ parameters:
       count: 1
       path: src/Proxy/Factory.php
     -
-      message: '#^Call to static method PHPUnit\\Framework\\Assert::assertInstanceOf\(\) with .JulienFalque\\\\SymfonyServiceReplacer\\\\ServiceReplacer. and JulienFalque\\SymfonyServiceReplacer\\ServiceReplacer will always evaluate to true\.$#'
+      message: '#^Call to an undefined method Symfony\\Component\\DependencyInjection\\ContainerInterface::restore\(\)\.$#'
       count: 1
       path: src/Test/IntegrationTest.php
     -
-      message: '#^Method JulienFalque\\SymfonyServiceReplacer\\Test\\SymfonyApp\\KernelSymfony50::configureRoutes\(\) has parameter \$routes with no typehint specified\.$#'
+      message: '#^Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with stdClass and JulienFalque\\SymfonyServiceReplacer\\Test\\SymfonyApp\\Cases\\Alias\\Main will always evaluate to false\.$#'
       count: 1
-      path: src/Test/SymfonyApp/KernelSymfony50.php
+      path: src/Test/IntegrationTest.php
+    -
+      message: '#^JulienFalque\\SymfonyServiceReplacer\\Bridge\\Symfony\\TestContainer::__construct\(\) does not call parent constructor from Symfony\\Bundle\\FrameworkBundle\\Test\\TestContainer\.$#'
+      count: 1
+      path: src/Bridge/Symfony/TestContainer.php
