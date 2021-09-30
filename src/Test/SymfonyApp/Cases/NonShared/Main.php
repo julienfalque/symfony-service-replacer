@@ -6,11 +6,8 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\NonShared;
 
 class Main
 {
-    /** @var Injected */
-    private $injected1;
-
-    /** @var Injected */
-    private $injected2;
+    private Injected $injected1;
+    private Injected $injected2;
 
     public function __construct(Injected $injected1, Injected $injected2)
     {

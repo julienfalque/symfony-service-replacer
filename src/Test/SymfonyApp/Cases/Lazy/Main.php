@@ -6,8 +6,7 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Lazy;
 
 class Main
 {
-    /** @var Injected */
-    private $injected;
+    private Injected $injected;
 
     public function __construct(Injected $injected)
     {

@@ -12,13 +12,13 @@ use LogicException;
 final class ReplacementMap
 {
     /** @var array<string, true> */
-    private $replaceableIds;
+    private array $replaceableIds;
 
     /** @var array<string, string> */
-    private $aliases;
+    private array $aliases;
 
     /** @var array<string, object> */
-    private $replacements = [];
+    private array $replacements = [];
 
     /**
      * @param list<string>          $replaceableIds

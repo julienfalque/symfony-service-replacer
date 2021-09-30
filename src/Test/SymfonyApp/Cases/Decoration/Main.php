@@ -6,8 +6,7 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration;
 
 class Main
 {
-    /** @var SomeInterface */
-    private $injected;
+    private SomeInterface $injected;
 
     public function __construct(SomeInterface $injected)
     {

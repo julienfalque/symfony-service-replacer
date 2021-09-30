@@ -16,12 +16,12 @@ final class Bundle extends BaseBundle
         $container->addCompilerPass(
             new ExtractReplaceableServiceAliasesPass(),
             PassConfig::TYPE_BEFORE_OPTIMIZATION,
-            -20000
+            -20000,
         );
         $container->addCompilerPass(
             new DecorateReplaceableServicesPass(),
             PassConfig::TYPE_BEFORE_OPTIMIZATION,
-            -20000
+            -20000,
         );
     }
 }

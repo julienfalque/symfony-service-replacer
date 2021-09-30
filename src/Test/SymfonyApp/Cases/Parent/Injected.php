@@ -6,8 +6,7 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent;
 
 class Injected
 {
-    /** @var string */
-    private $argument;
+    private string $argument;
 
     public function __construct(string $argument)
     {

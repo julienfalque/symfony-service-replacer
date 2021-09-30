@@ -6,11 +6,8 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\NonShared;
 
 class Injected
 {
-    /** @var int */
-    private static $instances = 0;
-
-    /** @var int */
-    private $instance;
+    private static int $instances = 0;
+    private int $instance;
 
     public function __construct()
     {

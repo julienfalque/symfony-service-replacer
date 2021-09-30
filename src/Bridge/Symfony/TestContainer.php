@@ -10,11 +10,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class TestContainer extends SymfonyTestContainer
 {
-    /** @var SymfonyTestContainer */
-    private $decoratedTestContainer;
-
-    /** @var ReplacementMap */
-    private $replacementMap;
+    private SymfonyTestContainer $decoratedTestContainer;
+    private ReplacementMap $replacementMap;
 
     public function __construct(
         SymfonyTestContainer $decoratedTestContainer,

@@ -24,8 +24,7 @@ use RuntimeException;
  */
 final class Factory extends AbstractBaseFactory
 {
-    /** @var ReplacementMap */
-    private $replacementMap;
+    private ReplacementMap $replacementMap;
 
     public function __construct(ReplacementMap $replacementMap)
     {
@@ -92,12 +91,12 @@ final class Factory extends AbstractBaseFactory
                         new ParameterGenerator('getService', 'callable'),
                     ],
                     MethodGenerator::FLAG_PUBLIC,
-                    '$this->getService = $getService;'
+                    '$this->getService = $getService;',
                 );
 
                 foreach (ProxiedMethodsFilter::getProxiedMethods($originalClass, []) as $method) {
                     $proxyMethod = MethodGenerator::fromReflectionWithoutBodyAndDocBlock(
-                        new MethodReflection($method->getDeclaringClass()->getName(), $method->getName())
+                        new MethodReflection($method->getDeclaringClass()->getName(), $method->getName()),
                     );
 
                     $returnType = $proxyMethod->getReturnType();
@@ -108,8 +107,8 @@ final class Factory extends AbstractBaseFactory
                         $proxyMethod->getName(),
                         implode(', ', array_map(
                             static fn (ParameterGenerator $parameter): string => '$'.$parameter->getName(),
-                            $proxyMethod->getParameters()
-                        ))
+                            $proxyMethod->getParameters(),
+                        )),
                     ));
 
                     $classGenerator->addMethodFromGenerator($proxyMethod);

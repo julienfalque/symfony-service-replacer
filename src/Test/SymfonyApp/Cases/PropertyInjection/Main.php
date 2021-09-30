@@ -6,8 +6,7 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\PropertyInje
 
 class Main
 {
-    /** @var Injected|null */
-    public $injected;
+    public ?Injected $injected = null;
 
     public function getValue(): string
     {

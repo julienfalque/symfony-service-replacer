@@ -6,8 +6,7 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Lazy;
 
 class Injected
 {
-    /** @var bool */
-    private static $instanciated = false;
+    private static bool $instanciated = false;
 
     public static function wasInstanciated(): bool
     {

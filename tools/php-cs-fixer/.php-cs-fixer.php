@@ -3,17 +3,15 @@
 declare(strict_types=1);
 
 $finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__.'/src')
+    ->in(__DIR__.'/../../src')
     ->append([__FILE__])
     ->exclude('Test/SymfonyApp/var')
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules([
         '@DoctrineAnnotation' => true,
-        '@PHP56Migration' => true,
-        '@PHP56Migration:risky' => true,
         '@PHP70Migration' => true,
         '@PHP70Migration:risky' => true,
         '@PHP71Migration' => true,
@@ -21,6 +19,7 @@ return PhpCsFixer\Config::create()
         '@PHP73Migration' => true,
         '@PHP74Migration' => true,
         '@PHP74Migration:risky' => true,
+        '@PSR12' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'align_multiline_comment' => [
@@ -28,19 +27,25 @@ return PhpCsFixer\Config::create()
         ],
         'array_indentation' => true,
         'array_push' => false,
-        'array_syntax' => [
-            'syntax' => 'short',
-        ],
+        'array_syntax' => true,
         'backtick_to_shell_exec' => true,
         'blank_line_before_statement' => [
             'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try'],
         ],
-        'class_attributes_separation' => true,
+        'class_attributes_separation' => [
+            'elements' => [
+                'const' => 'one',
+                'method' => 'one',
+                'property' => 'only_if_meta',
+                'trait_import' => 'none',
+            ],
+        ],
         'concat_space' => true,
         'combine_consecutive_issets' => true,
         'combine_consecutive_unsets' => true,
         'comment_to_phpdoc' => true,
         'compact_nullable_typehint' => true,
+        'empty_loop_body' => true,
         'escape_implicit_backslashes' => [
             'single_quoted' => true,
         ],
@@ -62,9 +67,7 @@ return PhpCsFixer\Config::create()
         ],
         'heredoc_to_nowdoc' => true,
         'linebreak_after_opening_tag' => true,
-        'list_syntax' => [
-            'syntax' => 'short',
-        ],
+        'list_syntax' => true,
         'logical_operators' => true,
         'method_argument_space' => [
             'on_multiline' => 'ensure_fully_multiline',
@@ -120,6 +123,7 @@ return PhpCsFixer\Config::create()
         'phpdoc_tag_casing' => true,
         'phpdoc_tag_type' => true,
         'phpdoc_to_param_type' => true,
+        'phpdoc_to_property_type' => true,
         'phpdoc_to_return_type' => true,
         'phpdoc_trim_consecutive_blank_line_separation' => true,
         'phpdoc_types_order' => [
@@ -144,8 +148,16 @@ return PhpCsFixer\Config::create()
         'strict_comparison' => true,
         'strict_param' => true,
         'string_line_ending' => true,
+        'trailing_comma_in_multiline' => [
+            'after_heredoc' => true,
+            'elements' => ['arrays', 'arguments'],
+        ],
+        'types_spaces' => [
+            'space' => 'single',
+        ],
         'void_return' => false,
         'yoda_style' => false,
     ])
     ->setFinder($finder)
+    ->setCacheFile(__DIR__.'/.php-cs-fixer.cache')
 ;

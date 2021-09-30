@@ -6,8 +6,7 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Decoration;
 
 class FirstDecorator implements SomeInterface
 {
-    /** @var SomeInterface */
-    private $decorated;
+    private SomeInterface $decorated;
 
     public function __construct(SomeInterface $decorated)
     {

@@ -11,11 +11,8 @@ use function get_class;
  */
 final class Specification
 {
-    /** @var string */
-    private $serviceId;
-
-    /** @var object */
-    private $serviceInstance;
+    private string $serviceId;
+    private object $serviceInstance;
 
     public function __construct(string $serviceId, object $serviceInstance)
     {

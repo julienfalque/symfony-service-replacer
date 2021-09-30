@@ -14,8 +14,7 @@ use Throwable;
  */
 final class SpecificationFactory
 {
-    /** @var ContainerInterface */
-    private $decoratedServiceLocator;
+    private ContainerInterface $decoratedServiceLocator;
 
     public function __construct(ContainerInterface $decoratedServiceLocator)
     {
@@ -34,7 +33,7 @@ final class SpecificationFactory
             throw new LogicException(
                 "Cannot create proxy specification for service \"{$replacedServiceId}\": an error occured while fetching the service.",
                 0,
-                $exception
+                $exception,
             );
         }
 

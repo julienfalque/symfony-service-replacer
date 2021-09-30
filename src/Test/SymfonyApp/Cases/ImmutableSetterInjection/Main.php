@@ -6,8 +6,7 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\ImmutableSet
 
 class Main
 {
-    /** @var Injected|null */
-    private $injected;
+    private ?Injected $injected = null;
 
     /**
      * @return static

@@ -21,7 +21,7 @@ final class Extension extends BaseExtension
     {
         $loader = new PhpFileLoader(
             $container,
-            new FileLocator(__DIR__.'/../Resources/config')
+            new FileLocator(__DIR__.'/../Resources/config'),
         );
         $loader->load('services.php');
     }

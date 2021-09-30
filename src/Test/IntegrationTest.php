@@ -27,14 +27,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\Single\Main::class);
 
         self::assertSame(
             'Mocked value from Main',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -44,14 +44,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceServiceUsingReturnValue(Cases\Alias\Injected::class.'.alias', 'Mocked value from Injected');
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -61,14 +61,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceServiceUsingReturnValue(Cases\Alias\Injected::class.'.recursive_alias', 'Mocked value from Injected');
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -78,14 +78,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\PublicService\Main::class);
 
         self::assertSame(
             'Mocked value from Main',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -95,14 +95,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\ConstructorInjection\Injected::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -112,14 +112,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\SetterInjection\Injected::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -129,14 +129,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\ImmutableSetterInjection\Injected::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -146,14 +146,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\PropertyInjection\Injected::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -163,14 +163,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\Factory\Injected::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -180,14 +180,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from SecondDecorator / Real value from FirstDecorator / Real value from Decorated',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\Decoration\Decorated::class);
 
         self::assertSame(
             'Real value from Main / Real value from SecondDecorator / Real value from FirstDecorator / Mocked value from Decorated',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -197,14 +197,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from SecondDecorator / Real value from FirstDecorator / Real value from Decorated',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\Decoration\FirstDecorator::class);
 
         self::assertSame(
             'Real value from Main / Real value from SecondDecorator / Mocked value from FirstDecorator',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -214,14 +214,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from SecondDecorator / Real value from FirstDecorator / Real value from Decorated',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\Decoration\SecondDecorator::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from SecondDecorator',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -232,7 +232,7 @@ final class IntegrationTest extends KernelTestCase
         self::assertFalse(Cases\Lazy\Injected::wasInstanciated());
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
         self::assertTrue(Cases\Lazy\Injected::wasInstanciated());
 
@@ -240,7 +240,7 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -250,14 +250,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\Parent\Injected::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -267,14 +267,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         $this->replaceService(Cases\ServiceSubscriber\Injected::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -284,22 +284,22 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Real value from Main / Real value from Injected 1',
-            $entrypoint->getValueFromInjected1()
+            $entrypoint->getValueFromInjected1(),
         );
         self::assertSame(
             'Real value from Main / Real value from Injected 2',
-            $entrypoint->getValueFromInjected2()
+            $entrypoint->getValueFromInjected2(),
         );
 
         $this->replaceService(Cases\NonShared\Injected::class);
 
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValueFromInjected1()
+            $entrypoint->getValueFromInjected1(),
         );
         self::assertSame(
             'Real value from Main / Mocked value from Injected',
-            $entrypoint->getValueFromInjected2()
+            $entrypoint->getValueFromInjected2(),
         );
     }
 
@@ -311,14 +311,14 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             'Mocked value from Main',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
 
         self::getContainer()->restore(Cases\PublicService\Main::class);
 
         self::assertSame(
             'Real value from Main',
-            $entrypoint->getValue()
+            $entrypoint->getValue(),
         );
     }
 
@@ -330,7 +330,7 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             $service,
-            self::getContainer()->get('synthetic_service')
+            self::getContainer()->get('synthetic_service'),
         );
     }
 
@@ -350,7 +350,7 @@ final class IntegrationTest extends KernelTestCase
 
         self::assertSame(
             $service,
-            self::getContainer()->get('non_replaceable_but_public_service')
+            self::getContainer()->get('non_replaceable_but_public_service'),
         );
     }
 
@@ -368,8 +368,7 @@ final class IntegrationTest extends KernelTestCase
     private function replaceServiceUsingReturnValue(string $replacedServiceId, string $returnValue): void
     {
         $mock = new class($returnValue) {
-            /** @var string */
-            private $returnValue;
+            private string $returnValue;
 
             public function __construct(string $returnValue)
             {
