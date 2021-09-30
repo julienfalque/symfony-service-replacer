@@ -6,15 +6,15 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent;
 
 class Injected
 {
-    private string $argument;
+    private string $value;
 
-    public function __construct(string $argument)
+    public function __construct(string $value)
     {
-        $this->argument = $argument;
+        $this->value = $value;
     }
 
     public function getValue(): string
     {
-        return 'Real value from Injected';
+        return "{$this->value} from Injected";
     }
 }

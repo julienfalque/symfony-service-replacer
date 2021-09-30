@@ -1,38 +1,39 @@
 includes:
-  - tools/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
-  - tools/phpstan/vendor/phpstan/phpstan-phpunit/extension.neon
-  - tools/phpstan/vendor/phpstan/phpstan-phpunit/rules.neon
-  - tools/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
-  - tools/phpstan/vendor/phpstan/phpstan-symfony/extension.neon
-  - tools/phpstan/vendor/phpstan/phpstan-symfony/rules.neon
+  - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+  - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - vendor/phpstan/phpstan-phpunit/rules.neon
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
+  - vendor/phpstan/phpstan-symfony/extension.neon
+  - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
   level: 8
   paths:
-    - src
+    - ../../src
   stubFiles:
-    - tools/phpstan/stubs/TestContainer.php
+    - stubs/TestContainer.php
   excludes_analyse:
-    - src/Test/SymfonyApp/var
-  tmpDir: tools/phpstan/cache
+    - ../../src/Test/SymfonyApp/var
+  tmpDir: cache
 
   symfony:
-    container_xml_path: src/Test/SymfonyApp/var/cache/test/JulienFalque_SymfonyServiceReplacer_Test_SymfonyApp_KernelTestDebugContainer.xml
+    container_xml_path: ../../src/Test/SymfonyApp/var/cache/test/JulienFalque_SymfonyServiceReplacer_Test_SymfonyApp_KernelTestDebugContainer.xml
 
   ignoreErrors:
     -
       message: '#^Method class@anonymous/Proxy/Factory\.php:\d+::generate\(\) has parameter \$originalClass with generic class ReflectionClass but does not specify its types: T$#'
       count: 1
-      path: src/Proxy/Factory.php
+      path: ../../src/Proxy/Factory.php
     -
       message: '#^Call to an undefined method Symfony\\Component\\DependencyInjection\\ContainerInterface::restore\(\)\.$#'
       count: 1
-      path: src/Test/IntegrationTest.php
+      path: ../../src/Test/IntegrationTest.php
     -
       message: '#^Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with stdClass and JulienFalque\\SymfonyServiceReplacer\\Test\\SymfonyApp\\Cases\\Alias\\Main will always evaluate to false\.$#'
       count: 1
-      path: src/Test/IntegrationTest.php
+      path: ../../src/Test/IntegrationTest.php
     -
       message: '#^JulienFalque\\SymfonyServiceReplacer\\Bridge\\Symfony\\TestContainer::__construct\(\) does not call parent constructor from Symfony\\Bundle\\FrameworkBundle\\Test\\TestContainer\.$#'
       count: 1
-      path: src/Bridge/Symfony/TestContainer.php
+      path: ../../src/Bridge/Symfony/TestContainer.php

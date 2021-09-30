@@ -28,7 +28,7 @@ jobs:
         run: src/Test/SymfonyApp/bin/create-cache
 
       - name: Run PHPStan
-        run: tools/phpstan/vendor/bin/phpstan analyze
+        run: tools/phpstan/vendor/bin/phpstan analyze --configuration tools/phpstan/phpstan.neon
 
   psalm:
     name: Psalm

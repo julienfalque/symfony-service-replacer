@@ -92,7 +92,7 @@ services:
     abstract: true
     class: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected
     arguments:
-      $argument: foo
+      $value: Real value
 
   JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected:
     parent: JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\Parent\Injected.parent
