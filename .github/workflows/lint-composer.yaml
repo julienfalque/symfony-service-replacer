@@ -34,4 +34,4 @@ jobs:
         run: composer install
 
       - name: Run Composer Require Checker
-        run: tools/composer-require-checker/vendor/bin/composer-require-checker check --config-file=.composer-require-checker.json
+        run: tools/composer-require-checker/vendor/bin/composer-require-checker check --config-file=tools/composer-require-checker/.composer-require-checker.json
