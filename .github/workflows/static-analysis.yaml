@@ -52,4 +52,4 @@ jobs:
         run: src/Test/SymfonyApp/bin/create-cache
 
       - name: Run Psalm
-        run: tools/psalm/vendor/bin/psalm
+        run: tools/psalm/vendor/bin/psalm --config=tools/psalm/psalm.xml

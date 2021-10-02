@@ -1,8 +1,11 @@
 {
   "require": {
     "php": "8.0.*",
-    "vimeo/psalm": "^4.3",
-    "psalm/plugin-symfony": "^2.1",
-    "psalm/plugin-phpunit": "^0.15.0"
+    "vimeo/psalm": "^4.10",
+    "psalm/plugin-phpunit": "^0.16",
+    "psalm/plugin-symfony": "^3.0"
+  },
+  "config": {
+    "sort-packages": true
   }
 }

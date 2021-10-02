@@ -6,7 +6,7 @@ namespace JulienFalque\SymfonyServiceReplacer\Test\SymfonyApp\Cases\SetterInject
 
 class Main
 {
-    private ?Injected $injected;
+    private ?Injected $injected = null;
 
     public function setInjected(Injected $injected): void
     {

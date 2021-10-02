@@ -2,7 +2,7 @@
 <psalm
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="https://getpsalm.org/schema/config"
-  xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
+  xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
   phpVersion="8.0"
   errorLevel="1"
   useDocblockPropertyTypes="true"
@@ -14,20 +14,20 @@
   ensureArrayStringOffsetsExist="true"
   ensureArrayIntOffsetsExist="true"
   sealAllMethods="true"
-  cacheDirectory="tools/psalm/cache"
+  cacheDirectory="cache"
 >
   <projectFiles>
-    <directory name="src"/>
+    <directory name="../../src"/>
     <ignoreFiles>
-      <directory name="src/Test/SymfonyApp/var"/>
-      <directory name="vendor"/>
+      <directory name="../../src/Test/SymfonyApp/var"/>
+      <directory name="../../vendor"/>
     </ignoreFiles>
   </projectFiles>
 
   <plugins>
     <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
-      <containerXml>src/Test/SymfonyApp/var/cache/test/JulienFalque_SymfonyServiceReplacer_Test_SymfonyApp_KernelTestDebugContainer.xml</containerXml>
+      <containerXml>../../src/Test/SymfonyApp/var/cache/test/JulienFalque_SymfonyServiceReplacer_Test_SymfonyApp_KernelTestDebugContainer.xml</containerXml>
     </pluginClass>
   </plugins>
 
@@ -43,42 +43,42 @@
     </MissingParamType>
     <MissingThrowsDocblock>
       <errorLevel type="suppress">
-        <file name="src/Bridge/Symfony/DependencyInjection/Extension.php"/>
-        <file name="src/Bridge/Symfony/ReplacementMapTest.php"/>
-        <file name="src/Proxy/FactoryTest.php"/>
-        <file name="src/Proxy/SpecificationTest.php"/>
-        <file name="src/Test/IntegrationTest.php"/>
-        <file name="src/Test/SymfonyApp/Cases/ServiceSubscriber/Main.php"/>
+        <file name="../../src/Bridge/Symfony/DependencyInjection/Extension.php"/>
+        <file name="../../src/Bridge/Symfony/ReplacementMapTest.php"/>
+        <file name="../../src/Proxy/FactoryTest.php"/>
+        <file name="../../src/Proxy/SpecificationTest.php"/>
+        <file name="../../src/Test/IntegrationTest.php"/>
+        <file name="../../src/Test/SymfonyApp/Cases/ServiceSubscriber/Main.php"/>
       </errorLevel>
     </MissingThrowsDocblock>
     <MixedOperand>
       <errorLevel type="suppress">
-        <file name="src/Test/SymfonyApp/Kernel.php"/>
+        <file name="../../src/Test/SymfonyApp/Kernel.php"/>
       </errorLevel>
     </MixedOperand>
     <InternalClass>
       <errorLevel type="suppress">
-        <file name="src/Bridge/Symfony/TestContainer.php"/>
+        <file name="../../src/Bridge/Symfony/TestContainer.php"/>
       </errorLevel>
     </InternalClass>
     <InternalMethod>
       <errorLevel type="suppress">
-        <file name="src/Bridge/Symfony/TestContainer.php"/>
+        <file name="../../src/Bridge/Symfony/TestContainer.php"/>
       </errorLevel>
     </InternalMethod>
     <MissingParamType>
       <errorLevel type="suppress">
-        <file name="src/Bridge/Symfony/TestContainer.php"/>
+        <file name="../../src/Bridge/Symfony/TestContainer.php"/>
       </errorLevel>
     </MissingParamType>
     <MixedArgument>
       <errorLevel type="suppress">
-        <file name="src/Bridge/Symfony/TestContainer.php"/>
+        <file name="../../src/Bridge/Symfony/TestContainer.php"/>
       </errorLevel>
     </MixedArgument>
     <UndefinedInterfaceMethod>
       <errorLevel type="suppress">
-        <file name="src/Test/IntegrationTest.php"/>
+        <file name="../../src/Test/IntegrationTest.php"/>
       </errorLevel>
     </UndefinedInterfaceMethod>
   </issueHandlers>
